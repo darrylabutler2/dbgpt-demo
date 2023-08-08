@@ -14,7 +14,26 @@ body {
         width: 100%; /* Make these elements take up the full width of the screen */
     }
     textarea {
-        width: 95%; /* Make the textarea take up almost the full width of the screen */
+        width: 95%; /* Make the textarea take up almost the full width of the container */
+        color: rgb(0, 0, 0);
+        background-color: #ffffff;
+        border: 2px solid #1769ff;
+        padding: 10px;
+    }
+    input[type="submit"] {
+        background-color: red;
+        color: white; /* This makes the text on the button white, adjust as necessary */
+        border: none; /* Removes the default button border */
+    }
+    input[type="submit"]:hover {
+        background-color: #ff7f7f; /* A lighter red when the button is hovered over */
+    }
+    
+    input[type="submit"]:active {
+        background-color: #990000; /* A darker red when the button is clicked */
+    }
+    .larger-text {
+        font-size: 20px; /* Adjust the value as necessary */
     }
 }
 
@@ -25,6 +44,25 @@ body {
     }
     textarea {
         width: 95%; /* Make the textarea take up almost the full width of the container */
+        color: rgb(0, 0, 0);
+        background-color: #ffffff;
+        border: 2px solid #1769ff;
+        padding: 10px;
+    }
+    input[type="submit"] {
+        background-color: red;
+        color: white; /* This makes the text on the button white, adjust as necessary */
+        border: none; /* Removes the default button border */
+    }
+    input[type="submit"]:hover {
+        background-color: #ff7f7f; /* A lighter red when the button is hovered over */
+    }
+    
+    input[type="submit"]:active {
+        background-color: #990000; /* A darker red when the button is clicked */
+    }
+    .larger-text {
+        font-size: 20px; /* Adjust the value as necessary */
     }
 }
 
@@ -35,5 +73,24 @@ body {
     }
     textarea {
         width: 95%; /* Make the textarea take up almost the full width of the container */
+        color: rgb(0, 0, 0);
+        background-color: #ffffff;
+        border: 2px solid #1769ff;
+        padding: 10px;
+    }
+    input[type="submit"] {
+        background-color: red;
+        color: white; /* This makes the text on the button white, adjust as necessary */
+        border: none; /* Removes the default button border */
+    }
+    input[type="submit"]:hover {
+        background-color: #ff7f7f; /* A lighter red when the button is hovered over */
+    }
+    
+    input[type="submit"]:active {
+        background-color: #990000; /* A darker red when the button is clicked */
+    }
+    .larger-text {
+        font-size: 20px; /* Adjust the value as necessary */
     }
 }
