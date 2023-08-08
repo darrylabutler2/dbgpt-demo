@@ -20,51 +20,60 @@
     <p id="response"></p>
 
     <script>
-        let messages = [];
-        const chatLog = document.getElementById('chat-log');
-        const form = document.querySelector('form');
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const messageText = document.getElementById('prompt').value;
-            const newMessage = {"role": "user", "content": `${messageText}`};
-            messages.push(newMessage);
-            document.getElementById('prompt').value = '';
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.classList.add('message--sent');
-            messageElement.innerHTML = `
-                <div class="message__text">${messageText}</div>
-            `;
-            chatLog.appendChild(messageElement);
-            chatLog.scrollTop = chatLog.scrollHeight;
-
-            $.ajax({
-                url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({prompt: messageText}),
-                success: function (response) {
-                    $("#response").text(response);
-                },
-                error: function (xhr, status, errorThrown) {
-                    $("#response").text("Error: " + errorThrown);
+        $(document).ready(function () {
+            let messages = [];
+            const chatLog = document.getElementById('chat-log');
+            const form = document.querySelector('form');
+    
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const messageText = document.getElementById('prompt').value;
+                const newMessage = {"role": "user", "content": `${messageText}`};
+                messages.push(newMessage);
+                document.getElementById('prompt').value = '';
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.classList.add('message--sent');
+                messageElement.innerHTML = `
+                    <div class="message__text">${messageText}</div>
+                `;
+                chatLog.appendChild(messageElement);
+                chatLog.scrollTop = chatLog.scrollHeight;
+    
+                $.ajax({
+                    url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({prompt: messageText}),
+                    success: function (response) {
+                        $("#response").text(response);
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        $("#response").text("Error: " + errorThrown);
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    let newAssistantMessage = {"role": "assistant", "content": `${data.completion.content}`};
+                    messages.push(newAssistantMessage);
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('message');
+                    messageElement.classList.add('message--received');
+                    messageElement.innerHTML = `
+                        <div class="message__text">${data.completion.content}</div>
+                    `;
+                    chatLog.appendChild(messageElement);
+                    chatLog.scrollTop = chatLog.scrollHeight;
+                })
+            });
+    
+            $('#prompt').on('keypress',function(e){
+                if(e.which == 13){ //Enter key pressed
+                    e.preventDefault(); //Skip default method
+                    $('input[type="submit"]').click(); //Trigger search button click event
                 }
-            })
-            .then(res => res.json())
-            .then(data => {
-            let newAssistantMessage = {"role": "assistant", "content": `${data.completion.content}`};
-            messages.push(newAssistantMessage);
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.classList.add('message--received');
-            messageElement.innerHTML = `
-                <div class="message__text">${data.completion.content}</div>
-            `;
-            chatLog.appendChild(messageElement);
-            chatLog.scrollTop = chatLog.scrollHeight;
             });
         });
-    </script>
+    </script>    
 </body>
 </html>
-
