@@ -17,13 +17,15 @@
         <input type="submit" value="Submit">
     </form>
     <div id="chat-log"></div>
+    <div id="responses"></div>
     <p id="response"></p>
-
+    
     <script>
         $(document).ready(function () {
             let messages = [];
             const chatLog = document.getElementById('chat-log');
             const form = document.querySelector('form');
+            const responses = document.getElementById('responses');
     
             form.addEventListener("submit", function(e) {
                 e.preventDefault();
@@ -46,10 +48,14 @@
                     contentType: "application/json",
                     data: JSON.stringify({prompt: messageText}),
                     success: function (response) {
-                        $("#response").text(response);
+                        const responseElement = document.createElement('p');
+                        responseElement.innerText = response;
+                        responses.appendChild(responseElement);
                     },
                     error: function (xhr, status, errorThrown) {
-                        $("#response").text("Error: " + errorThrown);
+                        const errorElement = document.createElement('p');
+                        errorElement.innerText = "Error: " + errorThrown;
+                        responses.appendChild(errorElement);
                     }
                 })
                 .then(res => res.json())
@@ -68,9 +74,9 @@
             });
     
             $('#prompt').on('keypress',function(e){
-                if(e.which == 13){ //Enter key pressed
-                    e.preventDefault(); //Skip default method
-                    $('input[type="submit"]').click(); //Trigger search button click event
+                if(e.which == 13){ 
+                    e.preventDefault(); 
+                    $('input[type="submit"]').click(); 
                 }
             });
         });
