@@ -1,0 +1,39 @@
+/* Add this to your style.css file */
+
+/* This will apply to all screen sizes */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+/* This will apply to screens smaller than 600px wide (usually smartphones) */
+@media screen and (max-width: 600px) {
+    form, #chat-log, #responses {
+        width: 100%; /* Make these elements take up the full width of the screen */
+    }
+    textarea {
+        width: 95%; /* Make the textarea take up almost the full width of the screen */
+    }
+}
+
+/* This will apply to screens between 600px and 1200px wide (usually tablets) */
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+    form, #chat-log, #responses {
+        width: 80%; /* Make these elements take up 80% of the screen width */
+    }
+    textarea {
+        width: 95%; /* Make the textarea take up almost the full width of the container */
+    }
+}
+
+/* This will apply to screens larger than 1200px wide (usually desktops) */
+@media screen and (min-width: 1200px) {
+    form, #chat-log, #responses {
+        width: 60%; /* Make these elements take up 60% of the screen width */
+    }
+    textarea {
+        width: 95%; /* Make the textarea take up almost the full width of the container */
+    }
+}
