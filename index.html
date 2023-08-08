@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAI DBGPT Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>OpenAI DBGPT Demo</h1>
+    <form id="gpt-form">
+        <label for="prompt">Would you like to play a game?:</label><br>
+        <textarea id="prompt" name="prompt" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+    <p id="response"></p>
+
+    <script>
+        $(document).ready(function () {
+            $("#gpt-form").submit(function (event) {
+                event.preventDefault();
+
+                var promptText = $("#prompt").val();
+
+                $.ajax({
+                    url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({prompt: promptText}),
+                    success: function (response) {
+                        $("#response").text(response);
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        $("#response").text("Error: " + errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
