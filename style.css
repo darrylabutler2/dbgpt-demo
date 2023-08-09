@@ -11,6 +11,9 @@ input{
 input[type="submit"] {
     margin-bottom: 10px; /* Add space below the button. Adjust value as necessary. */
 }
+.message-group {
+    padding: 10px 0; /* This adds 10px padding to the top and bottom */
+}
 
 body {
     display: flex;
