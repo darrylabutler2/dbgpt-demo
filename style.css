@@ -32,7 +32,7 @@ body {
         width: 95%; /* Make the textarea take up almost the full width of the container */
         color: rgb(0, 0, 0);
         background-color: #ffffff;
-        border: 2px solid #1769ff;
+        border: 4px solid #1769ff;
         padding: 10px;
     }
     input[type="submit"] {
@@ -61,7 +61,7 @@ body {
         width: 95%; /* Make the textarea take up almost the full width of the container */
         color: rgb(0, 0, 0);
         background-color: #ffffff;
-        border: 2px solid #1769ff;
+        border: 4px solid #1769ff;
         padding: 10px;
     }
     input[type="submit"] {
@@ -90,7 +90,7 @@ body {
         width: 95%; /* Make the textarea take up almost the full width of the container */
         color: rgb(0, 0, 0);
         background-color: #ffffff;
-        border: 2px solid #1769ff;
+        border: 4px solid #1769ff;
         padding: 10px;
     }
     input[type="submit"] {
