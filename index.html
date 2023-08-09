@@ -31,7 +31,7 @@
             e.preventDefault();
                 const messageText = document.getElementById('prompt').value;
 
-                // Create a container for both user's message and assistant's response
+                // Create a container for both the user's message and the assistant's response
                 const messageContainer = document.createElement('div');
                 messageContainer.classList.add('message-group');
 
@@ -43,6 +43,9 @@
                     <div class="message__text">${messageText}</div>
                 `;
                 messageContainer.appendChild(userMessageElement);
+
+                // Append the container to the chat log
+                chatLog.appendChild(messageContainer);
 
             $.ajax({
                 url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
