@@ -28,51 +28,52 @@
             const responses = document.getElementById('responses');
     
             form.addEventListener("submit", function(e) {
-                e.preventDefault();
+            e.preventDefault();
                 const messageText = document.getElementById('prompt').value;
-                const newMessage = {"role": "user", "content": `${messageText}`};
-                messages.push(newMessage);
-                document.getElementById('prompt').value = '';
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message');
-                messageElement.classList.add('message--sent');
-                messageElement.innerHTML = `
+
+                // Create a container for both user's message and assistant's response
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('message-group');
+
+                // Create and append the user's message to the container
+                const userMessageElement = document.createElement('div');
+                userMessageElement.classList.add('message');
+                userMessageElement.classList.add('message--sent');
+                userMessageElement.innerHTML = `
                     <div class="message__text">${messageText}</div>
                 `;
-                chatLog.insertBefore(messageElement, chatLog.firstChild);
+                messageContainer.appendChild(userMessageElement);
+
+            $.ajax({
+                url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({prompt: messageText}),
+            success: function (response) {
+                // Create and append the assistant's response to the container
+                const assistantMessageElement = document.createElement('div');
+                assistantMessageElement.classList.add('message');
+                assistantMessageElement.classList.add('message--received');
+                assistantMessageElement.innerHTML = `
+                    <div class="message__text">${response}</div>
+                `;
+                messageContainer.appendChild(assistantMessageElement);
+
+                // Insert the entire container at the top of the chat log
+                chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
-    
-                $.ajax({
-                    url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify({prompt: messageText}),
-                    success: function (response) {
-                        const responseElement = document.createElement('p');
-                        responseElement.innerText = response;
-                        responses.insertBefore(responseElement, responses.firstChild);
-                    },
-                    error: function (xhr, status, errorThrown) {
-                        const errorElement = document.createElement('p');
-                        errorElement.innerText = "Error: " + errorThrown;
-                        responses.insertBefore(errorElement, responses.firstChild);
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    let newAssistantMessage = {"role": "assistant", "content": `${data.completion.content}`};
-                    messages.push(newAssistantMessage);
-                    const messageElement = document.createElement('div');
-                    userMessageElement.classList.add('message');
-                    userMessageElement.classList.add('message--sent');
-                    userMessageElement.innerHTML = `
-                        <div class="message__text">${messageText}</div>
-                    `;
-                    chatLog.insertBefore(userMessageElement, chatLog.firstChild);
-                    chatLog.scrollTop = 0;
-                })
+            },
+            error: function (xhr, status, errorThrown) {
+                const errorElement = document.createElement('p');
+                errorElement.innerText = "Error: " + errorThrown;
+                responses.insertBefore(errorElement, responses.firstChild);
+                }
             });
-    
+
+        // Clear the user input field after the message is sent
+        document.getElementById('prompt').value = '';
+    });
+
             $('#prompt').on('keypress',function(e){
                 if(e.which == 13){ 
                     e.preventDefault(); 
