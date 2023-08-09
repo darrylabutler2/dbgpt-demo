@@ -44,8 +44,8 @@
                 `;
                 messageContainer.appendChild(userMessageElement);
 
-                // Append the container to the chat log
-                chatLog.appendChild(messageContainer);
+                chatLog.insertBefore(messageContainer, chatLog.firstChild);
+                chatLog.scrollTop = 0;
 
             $.ajax({
                 url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
