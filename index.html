@@ -22,6 +22,7 @@
     
     <script>
         $(document).ready(function () {
+            let conversationHistory = [];
             let messages = [];
             const chatLog = document.getElementById('chat-log');
             const form = document.querySelector('form');
@@ -31,11 +32,11 @@
             e.preventDefault();
                 const messageText = document.getElementById('prompt').value;
 
-                // Create a container for both the user's message and the assistant's response
+                conversationHistory.push(`User: ${messageText}`);
+
                 const messageContainer = document.createElement('div');
                 messageContainer.classList.add('message-group');
 
-                // Create and append the user's message to the container
                 const userMessageElement = document.createElement('div');
                 userMessageElement.classList.add('message');
                 userMessageElement.classList.add('message--sent');
@@ -51,9 +52,11 @@
                 url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify({prompt: messageText}),
+                data: JSON.stringify({prompt: conversationHistory.join("\n")}),
             success: function (response) {
-                // Create and append the assistant's response to the container
+                
+                conversationHistory.push(response);
+                
                 const assistantMessageElement = document.createElement('div');
                 assistantMessageElement.classList.add('message');
                 assistantMessageElement.classList.add('message--received');
@@ -62,7 +65,6 @@
                 `;
                 messageContainer.appendChild(assistantMessageElement);
 
-                // Insert the entire container at the top of the chat log
                 chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
             },
@@ -73,7 +75,6 @@
                 }
             });
 
-        // Clear the user input field after the message is sent
         document.getElementById('prompt').value = '';
     });
 
