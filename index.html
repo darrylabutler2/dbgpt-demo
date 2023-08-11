@@ -55,7 +55,9 @@
                 data: JSON.stringify({prompt: conversationHistory.join("\n")}),
             success: function (response) {
                 
-                conversationHistory.push(response);
+                let displayResponse = response.startsWith("Assistant:") ? response.replace("Assistant:", "").trim() : response;
+                conversationHistory.push(displayResponse);
+
                 
                 const assistantMessageElement = document.createElement('div');
                 assistantMessageElement.classList.add('message');
