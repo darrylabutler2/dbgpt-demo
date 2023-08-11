@@ -1,5 +1,15 @@
 /* Add this to your style.css file */
 
+.header-container {
+    display: flex;
+    align-items: center; /* This will vertically center align the h1 and image */
+    justify-content: start; /* This will align them to the left */
+}
+.header-container img {
+    height: 50px; /* You can adjust as needed */
+    width: auto;
+}
+
 /* This will apply to all screen sizes */
 textarea {
     margin-top: 10px; /* Add space below the label. Adjust value as necessary. */
@@ -14,7 +24,6 @@ input[type="submit"] {
 .message-group {
     padding: 10px 0; /* This adds 10px padding to the top and bottom */
 }
-
 body {
     display: flex;
     flex-direction: column;
