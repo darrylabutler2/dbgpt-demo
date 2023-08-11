@@ -22,54 +22,6 @@ body {
     padding: 10px;
     background-color: #000000;
 }
-@keyframes dots {
-    0%, 20% {
-        color: rgba(0,0,0,0);
-        text-shadow:
-            .25em 0 0 rgba(0,0,0,0),
-            .5em 0 0 rgba(0,0,0,0);
-    }
-    40% {
-        color: white;
-        text-shadow:
-            .25em 0 0 white,
-            .5em 0 0 rgba(0,0,0,0);
-    }
-    60% {
-        text-shadow:
-            .25em 0 0 white,
-            .5em 0 0 white;
-    }
-    100%, 80% {
-        text-shadow:
-            .25em 0 0 white,
-            .5em 0 0 white;
-    }
-}
-
-.loading {
-    color: white;
-    display: inline-block;
-    position: relative;
-    animation: dots 1s steps(5, end) infinite;
-}
-
-.loading::before, .loading::after {
-    content: '.';
-    position: absolute;
-    top: 0;
-    animation: dots 1s steps(5, end) infinite;
-}
-
-.loading::before {
-    left: -1.5em;
-    animation-delay: .2s;
-}
-
-.loading::after {
-    left: 1.5em;
-    animation-delay: .4s;
-}
 
 /* This will apply to screens smaller than 600px wide (usually smartphones) */
 @media screen and (max-width: 600px) {
@@ -97,6 +49,54 @@ body {
     }
     .larger-text {
         font-size: 20px; /* Adjust the value as necessary */
+    }
+    @keyframes dots {
+        0%, 20% {
+            color: rgba(0,0,0,0);
+            text-shadow:
+                .25em 0 0 rgba(0,0,0,0),
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        40% {
+            color: white;
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        60% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;
+        }
+        100%, 80% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;
+        }
+    }
+    
+    .loading {
+        color: white;
+        display: inline-block;
+        position: relative;
+        animation: dots 1s steps(5, end) infinite;
+    }
+    
+    .loading::before, .loading::after {
+        content: '.';
+        position: absolute;
+        top: 0;
+        animation: dots 1s steps(5, end) infinite;
+    }
+    
+    .loading::before {
+        left: -1.5em;
+        animation-delay: .2s;
+    }
+    
+    .loading::after {
+        left: 1.5em;
+        animation-delay: .4s;
     }
 }
 
@@ -127,6 +127,54 @@ body {
     .larger-text {
         font-size: 20px; /* Adjust the value as necessary */
     }
+    @keyframes dots {
+        0%, 20% {
+            color: rgba(0,0,0,0);
+            text-shadow:
+                .25em 0 0 rgba(0,0,0,0),
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        40% {
+            color: white;
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        60% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;
+        }
+        100%, 80% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;
+        }
+    }
+    
+    .loading {
+        color: white;
+        display: inline-block;
+        position: relative;
+        animation: dots 1s steps(5, end) infinite;
+    }
+    
+    .loading::before, .loading::after {
+        content: '.';
+        position: absolute;
+        top: 0;
+        animation: dots 1s steps(5, end) infinite;
+    }
+    
+    .loading::before {
+        left: -1.5em;
+        animation-delay: .2s;
+    }
+    
+    .loading::after {
+        left: 1.5em;
+        animation-delay: .4s;
+    }
 }
 
 /* This will apply to screens larger than 1200px wide (usually desktops) */
@@ -155,5 +203,53 @@ body {
     }
     .larger-text {
         font-size: 20px; /* Adjust the value as necessary */
+    }
+    @keyframes dots {
+        0%, 20% {
+            color: rgba(0,0,0,0);
+            text-shadow:
+                .25em 0 0 rgba(0,0,0,0),
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        40% {
+            color: white;
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 rgba(0,0,0,0);
+        }
+        60% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;
+        }
+        100%, 80% {
+            text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;
+        }
+    }
+    
+    .loading {
+        color: white;
+        display: inline-block;
+        position: relative;
+        animation: dots 1s steps(5, end) infinite;
+    }
+    
+    .loading::before, .loading::after {
+        content: '.';
+        position: absolute;
+        top: 0;
+        animation: dots 1s steps(5, end) infinite;
+    }
+    
+    .loading::before {
+        left: -1.5em;
+        animation-delay: .2s;
+    }
+    
+    .loading::after {
+        left: 1.5em;
+        animation-delay: .4s;
     }
 }
