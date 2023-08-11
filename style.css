@@ -6,7 +6,7 @@
     justify-content: start; /* This will align them to the left */
 }
 .header-container img {
-    height: 50px; /* You can adjust as needed */
+    height: 40px; /* You can adjust as needed */
     width: auto;
 }
 
