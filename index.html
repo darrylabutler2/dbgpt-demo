@@ -19,7 +19,8 @@
     <div style="color: white;" id="chat-log"></div>
     <div style="color: white;" id="responses"></div>
     <p style="color: white;" id="response"></p>
-    
+    <div class="loading" id="loadingDots" style="display: none;">.</div>
+
     <script>
         $(document).ready(function () {
             let conversationHistory = [];
@@ -48,6 +49,8 @@
                 chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
 
+            document.getElementById('loadingDots').style.display = 'inline-block';
+
             $.ajax({
                 url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
                 type: "POST",
@@ -58,7 +61,6 @@
                 let displayResponse = response.startsWith("Assistant:") ? response.replace("Assistant:", "").trim() : response;
                 conversationHistory.push(displayResponse);
 
-                
                 const assistantMessageElement = document.createElement('div');
                 assistantMessageElement.classList.add('message');
                 assistantMessageElement.classList.add('message--received');
@@ -69,8 +71,11 @@
 
                 chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
+
+                document.getElementById('loadingDots').style.display = 'none';
             },
             error: function (xhr, status, errorThrown) {
+                console.log(xhr.responseText);
                 const errorElement = document.createElement('p');
                 errorElement.innerText = "Error: " + errorThrown;
                 responses.insertBefore(errorElement, responses.firstChild);
