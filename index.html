@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,12 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
     <h1 style="color: white;">Ask SpotOn AI</h1>
     <form id="gpt-form">
         <label for="prompt" class="larger-text" style="color: white;">Help me help you. Ask me anything!:</label><br>
-        <textarea id="prompt" name="prompt" rows="4" cols="50"></textarea><br>
+        <textarea id="prompt" name="prompt" rows="4" cols="50" maxlength="500"></textarea><br>
         <input type="submit" value="Submit">
     </form>
     <div style="color: white;" id="chat-log"></div>
@@ -22,18 +24,17 @@
     <div class="loading" id="loadingDots" style="display: none;">.</div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let conversationHistory = [];
-            let messages = [];
             const chatLog = document.getElementById('chat-log');
             const form = document.querySelector('form');
             const responses = document.getElementById('responses');
-    
-            form.addEventListener("submit", function(e) {
-            e.preventDefault();
-                const messageText = document.getElementById('prompt').value;
 
-                conversationHistory.push(`User: ${messageText}`);
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const messageText = document.getElementById('prompt').value.trim();
+
+                conversationHistory.push(messageText);
 
                 const messageContainer = document.createElement('div');
                 messageContainer.classList.add('message-group');
@@ -45,53 +46,54 @@
                     <div class="message__text">${messageText}</div>
                 `;
                 messageContainer.appendChild(userMessageElement);
-
                 chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
 
-            document.getElementById('loadingDots').style.display = 'inline-block';
+                document.getElementById('loadingDots').style.display = 'inline-block';
 
-            $.ajax({
-                url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({prompt: conversationHistory.join("\n")}),
-            success: function (response) {
-                
-                let displayResponse = response.startsWith("Assistant:") ? response.replace("Assistant:", "").trim() : response;
-                conversationHistory.push(displayResponse);
+                // Limit history to the last 4 interactions
+                const limitedHistory = conversationHistory.slice(-2).join("\n");
 
-                const assistantMessageElement = document.createElement('div');
-                assistantMessageElement.classList.add('message');
-                assistantMessageElement.classList.add('message--received');
-                assistantMessageElement.innerHTML = `
-                    <div class="message__text">${displayResponse}</div>
-                `;
-                messageContainer.appendChild(assistantMessageElement);
+                $.ajax({
+                    url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ prompt: limitedHistory }),
+                    success: function(response) {
+                        let displayResponse = response.trim();
+                        conversationHistory.push(displayResponse);
 
-                chatLog.insertBefore(messageContainer, chatLog.firstChild);
-                chatLog.scrollTop = 0;
+                        const assistantMessageElement = document.createElement('div');
+                        assistantMessageElement.classList.add('message');
+                        assistantMessageElement.classList.add('message--received');
+                        assistantMessageElement.innerHTML = `
+                            <div class="message__text">${displayResponse}</div>
+                        `;
+                        messageContainer.appendChild(assistantMessageElement);
+                        chatLog.insertBefore(messageContainer, chatLog.firstChild);
+                        chatLog.scrollTop = 0;
+                        document.getElementById('loadingDots').style.display = 'none';
+                    },
+                    error: function(xhr, status, errorThrown) {
+                        console.log(xhr.responseText);
+                        const errorElement = document.createElement('p');
+                        errorElement.innerText = "Error: " + errorThrown;
+                        responses.insertBefore(errorElement, responses.firstChild);
+                    }
+                });
 
-                document.getElementById('loadingDots').style.display = 'none';
-            },
-            error: function (xhr, status, errorThrown) {
-                console.log(xhr.responseText);
-                const errorElement = document.createElement('p');
-                errorElement.innerText = "Error: " + errorThrown;
-                responses.insertBefore(errorElement, responses.firstChild);
-                }
+                document.getElementById('prompt').value = '';
             });
 
-        document.getElementById('prompt').value = '';
-    });
-
-            $('#prompt').on('keypress',function(e){
-                if(e.which == 13){ 
-                    e.preventDefault(); 
-                    $('input[type="submit"]').click(); 
+            $('#prompt').on('keypress', function(e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    $('input[type="submit"]').click();
                 }
             });
         });
-    </script>    
+    </script>
+
 </body>
+
 </html>
