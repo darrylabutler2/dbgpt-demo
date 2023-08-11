@@ -24,6 +24,9 @@ input[type="submit"] {
 .message-group {
     padding: 10px 0; /* This adds 10px padding to the top and bottom */
 }
+.message {
+    margin: 5px 0; /* This adds 5px margin to the top and bottom of each message */
+}
 body {
     display: flex;
     flex-direction: column;
