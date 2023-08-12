@@ -26,10 +26,12 @@
         <input type="submit" value="Submit">
     </form>
     </div>
-    <div style="color: white;" id="chat-log"></div>
-    <div style="color: white;" id="responses"></div>
-    <p style="color: white;" id="response"></p>
-    <div class="loading" id="loadingDots" style="display: none;">.</div>
+    <div class="chat-container">
+        <div style="color: white;" id="chat-log"></div>
+        <div style="color: white;" id="responses"></div>
+        <p style="color: white;" id="response"></p>
+        <div class="loading" id="loadingDots" style="display: none;">.</div>
+    </div>
     <div class="button-container">
         <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
     </div>  
@@ -61,7 +63,7 @@
 
                 document.getElementById('loadingDots').style.display = 'inline-block';
 
-                // Limit history to the last 4 interactions
+                // Limit history to the last 2 interactions
                 const limitedHistory = conversationHistory.slice(-2).join("\n");
 
                 $.ajax({
