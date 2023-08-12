@@ -1,133 +1,126 @@
-/* Add this to your style.css file */
-/* This will apply to all screen sizes */
-.header-container {
+/* Default styles - applicable to all screen sizes */
+.header-container, .button-container, .body-container {
     display: flex;
-    align-items: center; /* This will vertically center align the h1 and image */
-    justify-content: center; /* This will align them to the middle */
+    align-items: center;
+    justify-content: center;
 }
-.header-container img {
-    height: 50px; /* You can adjust as needed */
+
+body {
+    height: 100vh;
+}
+
+.header-container img, .button-container img, .body-container img {
+    height: 50px;
     width: auto;
 }
-.button-container {
-    display: flex;
-    align-items: center; /* This will vertically center align the h1 and image */
-    justify-content: center; /* This will align them to the middle */
-}
-/* Use flex to align main contents vertically and horizontally in the center */
-body {
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* full viewport height */
-}
-.body-container {
-    display: flex;
-    align-items: center; /* This will vertically center align the h1 and image */
-    justify-content: center; /* This will align them to the middle */
-}
+
 .chat-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
+
 textarea {
-    margin-top: 10px; /* Add space below the label. Adjust value as necessary. */
+    width: 95%;
+    margin-top: 10px;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: 4px solid #1769ff;
+    padding: 10px;
 }
-input{
+
+input {
     padding: 10px;
     margin-top: 10px;
 }
+
 input[type="submit"] {
-    margin-bottom: 10px; /* Add space below the button. Adjust value as necessary. */
+    margin-bottom: 10px;
+    background-color: #118C4F;
+    color: white;
+    border: none;
     border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+input[type="submit"]:hover {
+    background-color: #118c4ebb;
+}
+
+input[type="submit"]:active {
+    background-color: #0d6137;
+}
+
 .message-group {
-    padding: 10px 0; /* This adds 10px padding to the top and bottom */
+    padding: 10px 0;
 }
+
 .message {
-    margin: 5px 0; /* This adds 5px margin to the top and bottom of each message */
+    margin: 5px 0;
 }
-#toggleChatButton {
+
+#toggleChatButton, #resetChatButton {
     display: block;
-    margin: 20px auto 0;  /* Auto margins on left and right will center the block-level button */
+    margin: 20px auto 0;
     padding: 10px 20px;
-    background-color: #1769FF;
     color: #ffffff;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1000;  /* Ensure it stays on top of other elements */
+    z-index: 1000;
+}
+
+#toggleChatButton {
+    background-color: #1769FF;
 }
 
 #toggleChatButton:hover {
     background-color: #0056b3;
 }
 
-/* Initially hide the chat interface */
-#gpt-form, #chat-log, #responses, #response {
-    display: none;
+#resetChatButton {
+    margin-top: 10px;
+    background-color: #ff4d4d;
 }
 
-/* Initially hide the chat interface */
+#resetChatButton:hover {
+    background-color: #cc0000;
+}
+
 #gpt-form, #chat-log, #responses, #response, #loadingDots {
     display: none;
 }
+
 .main-container {
     background-image: url('Squiggles.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 100vh; /* This ensures the container occupies full height of the viewport */
-    position: relative; /* Needed if you want to add the optional overlay */
-}
-#resetChatButton {
-    display: block;
-    margin: 10px auto 0;  /* Auto margins on left and right will center the block-level button */
-    padding: 10px 20px;
-    background-color: #ff4d4d;  /* A red color to indicate reset action */
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1000;  /* Ensure it stays on top of other elements */
+    min-height: 100vh;
+    position: relative;
 }
 
-#resetChatButton:hover {
-    background-color: #cc0000;  /* A darker red for hover effect */
-}
-
-/* This will apply to screens smaller than 600px wide (usually smartphones) */
+/* Styles for devices with screen width less than or equal to 600px */
 @media screen and (max-width: 600px) {
-    form, #chat-log, #responses {
-        width: 100%; /* Make these elements take up the full width of the screen */
-    }
     textarea {
-        width: 95%; /* Make the textarea take up almost the full width of the container */
-        color: rgb(0, 0, 0);
-        background-color: #ffffff;
-        border: 4px solid #1769ff;
-        padding: 10px;
+        width: 100%; /* Use full width of the screen on smaller devices */
+        padding: 8px; /* Slightly reduce padding for more space */
+        box-sizing: border-box;
     }
-    input[type="submit"] {
-        background-color: #118C4F;
-        color: white; /* This makes the text on the button white, adjust as necessary */
-        border: none; /* Removes the default button border */
+    form, #chat-log, #responses {
+        width: 100%;
     }
-    input[type="submit"]:hover {
-        background-color: #118c4ebb; /* A lighter red when the button is hovered over */
-    }
-    
-    input[type="submit"]:active {
-        background-color: #0d6137; /* A darker red when the button is clicked */
-    }
+
     .larger-text {
-        font-size: 20px; /* Adjust the value as necessary */
+        font-size: 20px;
     }
+
+    /* ...your animations and loading styles here... */
     @keyframes dots {
         0%, 20% {
             color: rgba(0,0,0,0);
@@ -178,33 +171,17 @@ input[type="submit"] {
     }
 }
 
-/* This will apply to screens between 600px and 1200px wide (usually tablets) */
-@media screen and (min-width: 600px) and (max-width: 1200px) {
+/* Styles for devices with screen width between 600px and 1200px */
+@media screen and (min-width: 601px) and (max-width: 1200px) {
     form, #chat-log, #responses {
-        width: 80%; /* Make these elements take up 80% of the screen width */
+        width: 80%;
     }
-    textarea {
-        width: 95%; /* Make the textarea take up almost the full width of the container */
-        color: rgb(0, 0, 0);
-        background-color: #ffffff;
-        border: 4px solid #1769ff;
-        padding: 10px;
-    }
-    input[type="submit"] {
-        background-color: #118C4F;
-        color: white; /* This makes the text on the button white, adjust as necessary */
-        border: none; /* Removes the default button border */
-    }
-    input[type="submit"]:hover {
-        background-color: #118c4ebb; /* A lighter red when the button is hovered over */
-    }
-    
-    input[type="submit"]:active {
-        background-color: #0d6137; /* A darker red when the button is clicked */
-    }
+
     .larger-text {
-        font-size: 20px; /* Adjust the value as necessary */
+        font-size: 20px;
     }
+
+    /* ...your animations and loading styles here... */
     @keyframes dots {
         0%, 20% {
             color: rgba(0,0,0,0);
@@ -255,33 +232,17 @@ input[type="submit"] {
     }
 }
 
-/* This will apply to screens larger than 1200px wide (usually desktops) */
-@media screen and (min-width: 1200px) {
+/* Styles for devices with screen width greater than 1200px */
+@media screen and (min-width: 1201px) {
     form, #chat-log, #responses {
-        width: 60%; /* Make these elements take up 60% of the screen width */
+        width: 60%;
     }
-    textarea {
-        width: 95%; /* Make the textarea take up almost the full width of the container */
-        color: rgb(0, 0, 0);
-        background-color: #ffffff;
-        border: 4px solid #1769ff;
-        padding: 10px;
-    }
-    input[type="submit"] {
-        background-color: #118C4F;
-        color: white; /* This makes the text on the button white, adjust as necessary */
-        border: none; /* Removes the default button border */
-    }
-    input[type="submit"]:hover {
-        background-color: #118c4ebb; /* A lighter red when the button is hovered over */
-    }
-    
-    input[type="submit"]:active {
-        background-color: #0d6137; /* A darker red when the button is clicked */
-    }
+
     .larger-text {
-        font-size: 20px; /* Adjust the value as necessary */
+        font-size: 20px;
     }
+
+    /* ...your animations and loading styles here... */
     @keyframes dots {
         0%, 20% {
             color: rgba(0,0,0,0);
