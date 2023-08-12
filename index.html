@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <div class="header-container">
-        <h1 style="color: white; display: inline-block;">Ask SpotOn AI</h1>
+        <h1 style="color: white; display: inline-block; font-size: 40px;">SpotOn AI</h1>
         <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: inline-block; vertical-align: middle; margin-left: 10px;">
+    </div>
+    <div class="button-container">
+        <button style="display: block; margin: 10px; text-align: center;" id="toggleChatButton">Ask me a question</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -24,7 +27,9 @@
     <div style="color: white;" id="responses"></div>
     <p style="color: white;" id="response"></p>
     <div class="loading" id="loadingDots" style="display: none;">.</div>
-
+    <div class="button-container">
+        <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
+    </div>  
     <script>
         $(document).ready(function() {
             let conversationHistory = [];
@@ -85,6 +90,17 @@
                 });
 
                 document.getElementById('prompt').value = '';
+            });
+
+            $('#resetChatButton').on('click', function() {
+                // Clear chat log and reset conversation history
+                $('#chat-log').empty();
+                conversationHistory = [];
+             });
+
+            $('#toggleChatButton').on('click', function() {
+                $('#gpt-form, #chat-log, #responses, #response').toggle();
+                $(this).text($(this).text() === 'Ask me a question' ? 'Close Chat' : 'Ask me a question');
             });
 
             $('#prompt').on('keypress', function(e) {
