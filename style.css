@@ -1,5 +1,5 @@
 /* Add this to your style.css file */
-
+/* This will apply to all screen sizes */
 .header-container {
     display: flex;
     align-items: center; /* This will vertically center align the h1 and image */
@@ -14,12 +14,23 @@
     align-items: center; /* This will vertically center align the h1 and image */
     justify-content: center; /* This will align them to the middle */
 }
+/* Use flex to align main contents vertically and horizontally in the center */
+body {
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* full viewport height */
+}
 .body-container {
     display: flex;
     align-items: center; /* This will vertically center align the h1 and image */
     justify-content: center; /* This will align them to the middle */
 }
-/* This will apply to all screen sizes */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 textarea {
     margin-top: 10px; /* Add space below the label. Adjust value as necessary. */
 }
