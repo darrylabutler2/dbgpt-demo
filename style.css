@@ -20,6 +20,7 @@ input{
 }
 input[type="submit"] {
     margin-bottom: 10px; /* Add space below the button. Adjust value as necessary. */
+    border-radius: 10px;
 }
 .message-group {
     padding: 10px 0; /* This adds 10px padding to the top and bottom */
@@ -27,12 +28,56 @@ input[type="submit"] {
 .message {
     margin: 5px 0; /* This adds 5px margin to the top and bottom of each message */
 }
+#toggleChatButton {
+    display: block;
+    margin: 20px auto 0;  /* Auto margins on left and right will center the block-level button */
+    padding: 10px 20px;
+    background-color: #1769FF;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;  /* Ensure it stays on top of other elements */
+}
+
+#toggleChatButton:hover {
+    background-color: #0056b3;
+}
+
+/* Initially hide the chat interface */
+#gpt-form, #chat-log, #responses, #response {
+    display: none;
+}
+
+/* Initially hide the chat interface */
+#gpt-form, #chat-log, #responses, #response, #loadingDots {
+    display: none;
+}
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
     background-color: #000000;
+}
+#resetChatButton {
+    display: block;
+    margin: 10px auto 0;  /* Auto margins on left and right will center the block-level button */
+    padding: 10px 20px;
+    background-color: #ff4d4d;  /* A red color to indicate reset action */
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;  /* Ensure it stays on top of other elements */
+}
+
+#resetChatButton:hover {
+    background-color: #cc0000;  /* A darker red for hover effect */
 }
 
 /* This will apply to screens smaller than 600px wide (usually smartphones) */
@@ -48,16 +93,16 @@ body {
         padding: 10px;
     }
     input[type="submit"] {
-        background-color: red;
+        background-color: #118C4F;
         color: white; /* This makes the text on the button white, adjust as necessary */
         border: none; /* Removes the default button border */
     }
     input[type="submit"]:hover {
-        background-color: #ff7f7f; /* A lighter red when the button is hovered over */
+        background-color: #118c4ebb; /* A lighter red when the button is hovered over */
     }
     
     input[type="submit"]:active {
-        background-color: #990000; /* A darker red when the button is clicked */
+        background-color: #0d6137; /* A darker red when the button is clicked */
     }
     .larger-text {
         font-size: 20px; /* Adjust the value as necessary */
@@ -125,16 +170,16 @@ body {
         padding: 10px;
     }
     input[type="submit"] {
-        background-color: red;
+        background-color: #118C4F;
         color: white; /* This makes the text on the button white, adjust as necessary */
         border: none; /* Removes the default button border */
     }
     input[type="submit"]:hover {
-        background-color: #ff7f7f; /* A lighter red when the button is hovered over */
+        background-color: #118c4ebb; /* A lighter red when the button is hovered over */
     }
     
     input[type="submit"]:active {
-        background-color: #990000; /* A darker red when the button is clicked */
+        background-color: #0d6137; /* A darker red when the button is clicked */
     }
     .larger-text {
         font-size: 20px; /* Adjust the value as necessary */
@@ -202,16 +247,16 @@ body {
         padding: 10px;
     }
     input[type="submit"] {
-        background-color: red;
+        background-color: #118C4F;
         color: white; /* This makes the text on the button white, adjust as necessary */
         border: none; /* Removes the default button border */
     }
     input[type="submit"]:hover {
-        background-color: #ff7f7f; /* A lighter red when the button is hovered over */
+        background-color: #118c4ebb; /* A lighter red when the button is hovered over */
     }
     
     input[type="submit"]:active {
-        background-color: #990000; /* A darker red when the button is clicked */
+        background-color: #0d6137; /* A darker red when the button is clicked */
     }
     .larger-text {
         font-size: 20px; /* Adjust the value as necessary */
