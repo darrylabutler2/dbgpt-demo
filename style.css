@@ -104,6 +104,16 @@ input[type="submit"]:active {
     min-height: 100vh;
     position: relative;
 }
+.footer-container {
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the footer is above other content */
+}
 
 /* Styles for devices with screen width less than or equal to 600px */
 @media screen and (max-width: 600px) {
