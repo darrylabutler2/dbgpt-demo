@@ -27,6 +27,7 @@
     </form>
     </div>
     <div class="chat-container">
+        <div id="box-model"></div>
         <div style="color: white;" id="chat-log"></div>
         <div style="color: white;" id="responses"></div>
         <p style="color: white;" id="response"></p>
@@ -34,7 +35,9 @@
     </div>
     <div class="button-container">
         <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
-    </div>  
+    </div>
+    <div class="footer-container">
+        <p style="color: white;">Powered by DB | 2023</a></p>  
     <script>
         $(document).ready(function() {
             let conversationHistory = [];
