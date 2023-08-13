@@ -140,6 +140,7 @@ input[type="submit"]:active {
         width: 100%; /* Use full width of the screen on smaller devices */
         padding: 8px; /* Slightly reduce padding for more space */
         box-sizing: border-box;
+        font-size: 20px;
     }
     form, #chat-log, #responses {
         width: 100%;
