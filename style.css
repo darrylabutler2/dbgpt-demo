@@ -1,23 +1,21 @@
 /* Default styles - applicable to all screen sizes */
-.header-container, .button-container, .body-container {
+.header-container, .button-container, .body-container, .chat-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+form#gpt-form {
+    width: -webkit-fill-available;
+}
 body {
     height: 100vh;
 }
-
 .header-container img, .button-container img, .body-container img {
     height: 50px;
     width: auto;
 }
 .chat-container {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 #chat-log {
     height: auto;
@@ -32,7 +30,7 @@ div#chat-log {
     width: -webkit-fill-available;
 }
 textarea {
-    width: 95%;
+    width: -webkit-fill-available;
     margin-top: 10px;
     color: rgb(0, 0, 0);
     background-color: #ffffff;
