@@ -13,7 +13,7 @@
         <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: inline-block; vertical-align: middle; margin-left: 10px;">
     </div>
     <div class="button-container">
-        <button style="display: block; margin: 10px; text-align: center;" id="toggleChatButton">Ask me a question</button>
+        <button style="display: block; margin: 10px; text-align: center;" id="toggleChatButton">Ask a Question</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -35,8 +35,11 @@
     <div class="button-container">
         <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
     </div>
+    <div class="button-container">
+        <button id="downloadChatBtn">Save Chat</button>
+    </div>
     <div class="footer-container">
-        <p style="color: white;">Powered by DB | 2023</a></p>  
+        <p style="color: white;">Presented by DB | 2023</a></p>  
     <script>
         $(document).ready(function() {
             let conversationHistory = [];
@@ -97,6 +100,16 @@
                 });
 
                 document.getElementById('prompt').value = '';
+                document.getElementById("downloadChatBtn").addEventListener("click", function() {
+                    let chatContent = document.getElementById("chat-log").innerText;
+                    let blob = new Blob([chatContent], { type: "text/plain;charset=utf-8" });
+                    let a = document.createElement("a");
+                    a.href = URL.createObjectURL(blob);
+                    a.download = "chat-log.txt";
+                    a.click();
+                    URL.revokeObjectURL(a.href);
+                });
+
             });
 
             $('#resetChatButton').on('click', function() {
