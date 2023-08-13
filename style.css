@@ -70,7 +70,7 @@ input[type="submit"]:active {
     margin: 5px 0;
 }
 
-#toggleChatButton, #resetChatButton {
+#toggleChatButton, #resetChatButton, #downloadChatBtn {
     display: block;
     margin: 20px auto 0;
     padding: 10px 20px;
@@ -98,6 +98,17 @@ input[type="submit"]:active {
 
 #resetChatButton:hover {
     background-color: #cc0000;
+}
+#downloadChatBtn {
+    background-color: #767676;
+}
+
+#downloadChatBtn:hover {
+    background-color: #828a86;
+}
+
+#downloadChatBtn:active {
+    background-color: #2c2f2d;
 }
 
 #gpt-form, #chat-log, #responses, #response, #loadingDots {
