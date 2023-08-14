@@ -85,6 +85,8 @@ input[type="submit"]:active {
 
 #toggleChatButton {
     background-color: #1769FF;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 #toggleChatButton:hover {
@@ -101,6 +103,8 @@ input[type="submit"]:active {
 }
 #downloadChatBtn {
     background-color: #767676;
+    font-size: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 #downloadChatBtn:hover {
@@ -322,4 +326,3 @@ input[type="submit"]:active {
         animation-delay: .4s;
     }
 }
-
