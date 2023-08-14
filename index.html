@@ -116,20 +116,29 @@
                 // Loop through the error messages before clearing the chat log
                 $('#chat-log .error-message').each(function() {
                     if ($(this).text() === "Error: Internal Server Error") {
-                        // If you need to do something specific with error messages, do it here.
-            
+                        // If you need to do something specific with error messages, do it here
                         $(this).remove();  // This line might be redundant if you're clearing the entire chat log in the next step.
-                        conversationHistory = [];
                     }
                 });
-
-                // Stop the dot animation
-                $('.loading').removeClass('loading');
-                $('#loadingDots').remove();
-
-                // Now clear the entire chat log
+    
+                // Clear conversation history
+                conversationHistory = [];
+    
+                // Hide loading dots
+                $('#loadingDots').hide();
+    
+                // Now clear the entire chat log and responses
                 $('#chat-log').empty();
                 $('#responses').empty();
+    
+                // Append the start message to the chat log
+                const startMessageElement = document.createElement('div');
+                startMessageElement.classList.add('message');
+                startMessageElement.classList.add('message--received');
+                startMessageElement.innerHTML = `
+                    <div class="message__text">Hello, how can I assist you today?</div>
+                `;
+                chatLog.appendChild(startMessageElement);  
             });
 
             $('#toggleChatButton').on('click', function() {
