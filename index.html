@@ -113,10 +113,24 @@
             });
 
             $('#resetChatButton').on('click', function() {
-                // Clear chat log and reset conversation history
+                // Loop through the error messages before clearing the chat log
+                $('#chat-log .error-message').each(function() {
+                    if ($(this).text() === "Error: Internal Server Error") {
+                        // If you need to do something specific with error messages, do it here.
+            
+                        $(this).remove();  // This line might be redundant if you're clearing the entire chat log in the next step.
+                        conversationHistory = [];
+                    }
+                });
+
+                // Stop the dot animation
+                $('.loading').removeClass('loading');
+                $('#loadingDots').remove();
+
+                // Now clear the entire chat log
                 $('#chat-log').empty();
-                conversationHistory = [];
-             });
+                $('#responses').empty();
+            });
 
             $('#toggleChatButton').on('click', function() {
                 $('#gpt-form, #chat-log, #responses, #response').toggle();
@@ -135,4 +149,3 @@
 </body>
 
 </html>
-
