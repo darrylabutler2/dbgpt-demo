@@ -25,6 +25,7 @@ body {
     color: rgb(255, 255, 255);
     background-color: #000000;
     border: 4px solid #1769ff;
+    border-radius: 10px;
 }
 div#chat-log {
     width: -webkit-fill-available;
@@ -36,6 +37,7 @@ textarea {
     background-color: #ffffff;
     border: 4px solid #1769ff;
     padding: 10px;
+    border-radius: 10px;
 }
 
 input {
@@ -126,6 +128,7 @@ input[type="submit"]:active {
     background-position: center;
     min-height: 100vh;
     position: relative;
+    padding: 10px;
 }
 .footer-container {
     color: white;
