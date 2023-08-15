@@ -146,8 +146,9 @@ input[type="submit"]:active {
         box-sizing: border-box;
         font-size: 20px;
     }
-    form, #chat-log, #responses {
+    #gpt-form, #chat-log, #responses {
         width: 100%;
+        font-size: 16px
     }
 
     .larger-text {
@@ -209,6 +210,11 @@ input[type="submit"]:active {
 @media screen and (min-width: 601px) and (max-width: 1200px) {
     form, #chat-log, #responses {
         width: 80%;
+        font-size:16px
+    }
+
+    textarea {
+        font-size: 18px;
     }
 
     .larger-text {
@@ -268,8 +274,13 @@ input[type="submit"]:active {
 
 /* Styles for devices with screen width greater than 1200px */
 @media screen and (min-width: 1201px) {
-    form, #chat-log, #responses {
+    #gpt-form, #chat-log, #responses {
         width: 60%;
+        font-size: 16px
+    }
+
+    textarea {
+        font-size: 18px;
     }
 
     .larger-text {
