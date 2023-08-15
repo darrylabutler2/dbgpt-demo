@@ -22,15 +22,16 @@
     <div class="body-container">
     <form id="gpt-form">
         <label for="prompt" class="larger-text" style="color: white;">Help me help you. Ask me anything!:</label><br>
-        <textarea id="prompt" name="prompt" rows="4" cols="50" maxlength="500" spellcheck="true"></textarea><br>
+        <textarea id="prompt" name="prompt" rows="6" cols="50" maxlength="500" spellcheck="true"></textarea><br>
         <input type="submit" value="Submit">
     </form>
     </div>
     <div class="chat-container">
-        <div style="color: white;" id="chat-log"></div>
+        <div style="color: white;" id="chat-log">
+            <div class="loading" id="loadingDots" style="display: none;">.</div>
+        </div>
         <div style="color: white;" id="responses"></div>
         <p style="color: white;" id="response"></p>
-        <div class="loading" id="loadingDots" style="display: none;">.</div>
     </div>
     <div class="button-container">
         <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
