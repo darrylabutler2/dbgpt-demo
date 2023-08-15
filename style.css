@@ -63,7 +63,8 @@ input {
 }
 
 input[type="submit"] {
-    margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
     background-color: #118C4F;
     color: white;
     border: none;
@@ -89,7 +90,7 @@ input[type="submit"]:active {
     margin: 5px 0;
 }
 
-#toggleChatButton, #resetChatButton, #downloadChatBtn {
+#resetChatButton, #downloadChatBtn {
     display: block;
     margin: 20px auto 0;
     padding: 10px 20px;
@@ -100,16 +101,6 @@ input[type="submit"]:active {
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     z-index: 1000;
-}
-
-#toggleChatButton {
-    background-color: #1769FF;
-    font-size: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#toggleChatButton:hover {
-    background-color: #0056b3;
 }
 
 #resetChatButton {
