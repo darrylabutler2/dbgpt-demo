@@ -159,7 +159,7 @@ input[type="submit"]:active {
     }
     #gpt-form, #chat-log, #responses {
         width: 100%;
-        font-size: 16px
+        font-size: 20px
     }
 
     .larger-text {
