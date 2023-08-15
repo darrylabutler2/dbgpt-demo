@@ -54,8 +54,7 @@
                 e.preventDefault();
 
                 const messageText = document.getElementById('prompt').value.trim();
-
-                if (messageText === '') {
+                    if (messageText === '') {
                     return; // If the input is empty, don't continue with submission
                 }
 
@@ -77,8 +76,8 @@
                 chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
 
-                document.getElementById('loadingDots').style.display = 'inline-block';
-                
+                $('#chat-log').append($('#loadingDots').clone().css('display', 'inline-block'));
+
                 // Limit history to the last 2 interactions
                 const limitedHistory = conversationHistory.slice(-2).join("\n");
 
@@ -149,6 +148,7 @@
                 // Now clear the entire chat log and responses
                 $('#chat-log').empty();
                 $('#responses').empty();
+                $('.chat-container').append($('#loadingDots'));
 
                 console.log("Reset function finished");  
             });
