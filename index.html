@@ -8,17 +8,17 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="./style.css">
         <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <div class="header-container">
-        <h1 style="color: white; display: inline-block; font-size: 40px;">SpotOn AI</h1>
-        <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: inline-block; vertical-align: middle; margin-left: 10px;">
-    </div>
-    <div class="button-container">
-        <button style="display: block; margin: 10px; text-align: center;" id="toggleChatButton">Ask a Question</button>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+    <div class="header-container">
+        <h1 style="color: white; display: inline-block; font-size: 40px;">SpotOn AI</h1>
+        <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: none; vertical-align: middle; margin-left: 10px;">
+    </div>
+    <div class="button-container">
+        <button style="display: none; margin: 10px; text-align: center;" id="toggleChatButton">Ask a Question</button>
+    </div>
     <div class="body-container">
     <form id="gpt-form">
         <label for="prompt" class="larger-text" style="color: white;">Help me help you. Ask me anything!:</label><br>
@@ -50,6 +50,9 @@
             form.addEventListener("submit", function(e) {
                 e.preventDefault();
                 const messageText = document.getElementById('prompt').value.trim();
+
+                // Show the chat log and related elements
+                $('#chat-log, #responses, #response').show();
 
                 conversationHistory.push(messageText);
 
@@ -120,6 +123,9 @@
                         $(this).remove();  // This line might be redundant if you're clearing the entire chat log in the next step.
                     }
                 });
+
+                // Hide the chat log and related elements
+                $('#chat-log, #responses, #response').hide();
     
                 // Clear conversation history
                 conversationHistory = [];
@@ -136,13 +142,14 @@
                 startMessageElement.classList.add('message');
                 startMessageElement.classList.add('message--received');
                 startMessageElement.innerHTML = `
-                    <div class="message__text">Hello, how can I assist you today?</div>
+                    <div class="message__text"></div>
                 `;
                 chatLog.appendChild(startMessageElement);  
             });
 
             $('#toggleChatButton').on('click', function() {
-                $('#gpt-form, #chat-log, #responses, #response').toggle();
+                $('#gpt-form, #responses, #response').toggle();
+                $('#chat-log').hide();
                 $(this).text($(this).text() === 'Ask a Question' ? 'Close Chat' : 'Ask a Question');
             });
 
