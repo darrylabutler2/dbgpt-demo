@@ -16,9 +16,6 @@
         <h1 style="color: white; display: inline-block; font-size: 40px; padding-bottom: 40px; padding-top: 20px;">SpotOn AI</h1>
         <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: none; vertical-align: middle; margin-left: 10px;">
     </div>
-    <div class="button-container">
-        <button style="display: none; margin: 10px; text-align: center;" id="toggleChatButton">Ask a Question</button>
-    </div>
     <div class="body-container">
         <form id="gpt-form">
             <div class="textarea-container">
@@ -58,6 +55,10 @@
 
                 const messageText = document.getElementById('prompt').value.trim();
 
+                if (messageText === '') {
+                    return; // If the input is empty, don't continue with submission
+                }
+
                 // Show the chat log and related elements
                 $('#chat-log, #responses, #response').show();
 
@@ -80,10 +81,6 @@
                 
                 // Limit history to the last 2 interactions
                 const limitedHistory = conversationHistory.slice(-2).join("\n");
-
-                const loadingDots = document.getElementById('loadingDots');
-                chatLog.appendChild(loadingDots);
-                loadingDots.style.display = 'inline-block';
 
                 $.ajax({
                     url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
@@ -110,12 +107,14 @@
                         const errorElement = document.createElement('p');
                         errorElement.innerText = "Error: " + errorThrown;
                         responses.insertBefore(errorElement, responses.firstChild);
-                        loadingDots.style.display = 'none';
+                        document.getElementById('loadingDots').style.display = 'none';
                     }
                 });
 
                 document.getElementById('prompt').value = '';
-                document.getElementById("downloadChatBtn").addEventListener("click", function() {
+            });
+
+            document.getElementById("downloadChatBtn").addEventListener("click", function() {
                     let chatContent = document.getElementById("chat-log").innerText;
                     let blob = new Blob([chatContent], { type: "text/plain;charset=utf-8" });
                     let a = document.createElement("a");
@@ -124,10 +123,9 @@
                     a.click();
                     URL.revokeObjectURL(a.href);
                 });
-
-            });
-
+                
             $('#resetChatButton').on('click', function() {
+                console.log("Reset button clicked");
                 // Loop through the error messages before clearing the chat log
                 $('#chat-log .error-message').each(function() {
                     if ($(this).text() === "Error: Internal Server Error") {
@@ -141,28 +139,18 @@
     
                 // Clear conversation history
                 conversationHistory = [];
-    
+
+                // Clear the input field
+                $('#prompt').val('');
+
                 // Hide loading dots
                 $('#loadingDots').hide();
     
                 // Now clear the entire chat log and responses
                 $('#chat-log').empty();
                 $('#responses').empty();
-    
-                // Append the start message to the chat log
-                const startMessageElement = document.createElement('div');
-                startMessageElement.classList.add('message');
-                startMessageElement.classList.add('message--received');
-                startMessageElement.innerHTML = `
-                    <div class="message__text"></div>
-                `;
-                chatLog.appendChild(startMessageElement);  
-            });
 
-            $('#toggleChatButton').on('click', function() {
-                $('#gpt-form, #responses, #response').toggle();
-                $('#chat-log').hide();
-                $(this).text($(this).text() === 'Ask a Question' ? 'Close Chat' : 'Ask a Question');
+                console.log("Reset function finished");  
             });
 
             $('#prompt').on('keypress', function(e) {
