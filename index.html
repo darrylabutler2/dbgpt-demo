@@ -13,24 +13,26 @@
 
 <body>
     <div class="header-container">
-        <h1 style="color: white; display: inline-block; font-size: 40px; padding-bottom: 40px;">SpotOn AI</h1>
+        <h1 style="color: white; display: inline-block; font-size: 40px;">SpotOn AI</h1>
         <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: none; vertical-align: middle; margin-left: 10px;">
     </div>
+    <div class="button-container">
+        <button style="display: none; margin: 10px; text-align: center;" id="toggleChatButton">Ask a Question</button>
+    </div>
     <div class="body-container">
-    <form id="gpt-form">
-        <div class="textarea-container">
-            <label for="prompt" class="larger-text" style="color: white;" display="flex">Help me help you. Ask me anything!</label><br>
-            <textarea id="prompt" name="prompt" rows="3" cols="50" maxlength="500" spellcheck="true"></textarea><br>
-        </div>
-        <input type="submit" value="Submit">
-    </form>
+        <form id="gpt-form">
+            <div class="textarea-container">
+                <label for="prompt" class="larger-text" style="color: white;" display="flex">Help me help you. Ask me anything!</label><br>
+                <textarea id="prompt" name="prompt" rows="3" cols="50" maxlength="500" spellcheck="true"></textarea><br>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
     </div>
     <div class="chat-container">
-        <div style="color: white;" id="chat-log">
-            <div class="loading" id="loadingDots" style="display: none;">.</div>
-        </div>
+        <div style="color: white;" id="chat-log"></div>
         <div style="color: white;" id="responses"></div>
         <p style="color: white;" id="response"></p>
+        <div class="loading" id="loadingDots" style="display: none;">.</div>
     </div>
     <div class="button-container">
         <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
