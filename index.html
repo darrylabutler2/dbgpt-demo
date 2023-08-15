@@ -32,7 +32,11 @@
         <div style="color: white;" id="chat-log"></div>
         <div style="color: white;" id="responses"></div>
         <p style="color: white;" id="response"></p>
-        <div class="loading" id="loadingDots" style="display: none;">.</div>
+        <div class="loading" id="loadingDots" style="display: none;">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
     <div class="button-container">
         <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
@@ -51,6 +55,7 @@
 
             form.addEventListener("submit", function(e) {
                 e.preventDefault();
+
                 const messageText = document.getElementById('prompt').value.trim();
 
                 // Show the chat log and related elements
@@ -72,9 +77,13 @@
                 chatLog.scrollTop = 0;
 
                 document.getElementById('loadingDots').style.display = 'inline-block';
-
+                
                 // Limit history to the last 2 interactions
                 const limitedHistory = conversationHistory.slice(-2).join("\n");
+
+                const loadingDots = document.getElementById('loadingDots');
+                chatLog.appendChild(loadingDots);
+                loadingDots.style.display = 'inline-block';
 
                 $.ajax({
                     url: "https://dbgptapp.azurewebsites.net/api/DBApp?",
@@ -101,6 +110,7 @@
                         const errorElement = document.createElement('p');
                         errorElement.innerText = "Error: " + errorThrown;
                         responses.insertBefore(errorElement, responses.firstChild);
+                        loadingDots.style.display = 'none';
                     }
                 });
 
