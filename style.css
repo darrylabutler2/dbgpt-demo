@@ -134,7 +134,8 @@ input[type="submit"]:active {
     background-image: url('Squiggles.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: fill;
+    background-attachment: fixed;
     min-height: 100vh;
     position: relative;
     padding: 10px;
