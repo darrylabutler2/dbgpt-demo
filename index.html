@@ -2,16 +2,16 @@
 <html>
 
 <head>
-    <div class="main-container">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="./style.css">
-        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+    <div class="main-container">
     <div class="header-container">
         <h1 style="color: white; display: inline-block; font-size: 50px; padding-bottom: 0px; padding-top: 15px;">SpotOn AI</h1>
         <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: none; vertical-align: middle; margin-left: 10px;">
@@ -29,14 +29,15 @@
         </form>
     </div>
     <div class="chat-container">
-        <div style="color: white;" id="chat-log"></div>
+        <div style="color: white;" id="chat-log">
+            <div class="loading" id="loadingDots" style="display: none;">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
         <div style="color: white;" id="responses"></div>
         <p style="color: white;" id="response"></p>
-        <div class="loading" id="loadingDots" style="display: none;">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
     </div>
     <div class="button-container">
         <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
@@ -45,7 +46,8 @@
         <button id="downloadChatBtn">Save Chat</button>
     </div>
     <div class="footer-container">
-        <p style="color: white;">Presented by DB | 2023</a></p>  
+        <p style="color: white;">Presented by DB | 2023</a></p>
+    </div>  
     <script>
         $(document).ready(function() {
             let conversationHistory = [];
@@ -79,7 +81,7 @@
                 chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
 
-                $('#chat-log').append($('#loadingDots').clone().css('display', 'inline-block'));
+                $('#loadingDots').show();
 
                 // Limit history to the last 2 interactions
                 const limitedHistory = conversationHistory.slice(-2).join("\n");
@@ -102,14 +104,14 @@
                         messageContainer.appendChild(assistantMessageElement);
                         chatLog.insertBefore(messageContainer, chatLog.firstChild);
                         chatLog.scrollTop = 0;
-                        document.getElementById('loadingDots').style.display = 'none';
+                        $('#loadingDots').hide();
                     },
                     error: function(xhr, status, errorThrown) {
                         console.log(xhr.responseText);
                         const errorElement = document.createElement('p');
                         errorElement.innerText = "Error: " + errorThrown;
                         responses.insertBefore(errorElement, responses.firstChild);
-                        document.getElementById('loadingDots').style.display = 'none';
+                        $('#loadingDots').hide();
                     }
                 });
 
@@ -145,15 +147,10 @@
                 // Clear the input field
                 $('#prompt').val('');
 
-                // Hide loading dots
-                $('#loadingDots').hide();
-    
                 // Now clear the entire chat log and responses
-                $('#chat-log').empty();
-                $('#responses').empty();
-                $('.chat-container').append($('#loadingDots'));
+                $('#chat-log .message-group').remove();
 
-                console.log("Reset function finished");  
+                console.log("Reset function finished");
             });
 
             $('#prompt').on('keypress', function(e) {
