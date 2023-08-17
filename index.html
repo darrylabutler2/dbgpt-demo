@@ -12,42 +12,46 @@
 
 <body>
     <div class="main-container">
-    <div class="header-container">
-        <h1 style="color: white; display: inline-block; font-size: 50px; padding-bottom: 0px; padding-top: 15px;">SpotOn AI</h1>
-        <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: none; vertical-align: middle; margin-left: 10px;">
-    </div>
-    <div class="image-container">
-        <img src="4 Pillars.png" alt="4 Pillars">
-    </div>
-    <div class="body-container">
-        <form id="gpt-form">
-            <div class="textarea-container">
-                <label for="prompt" class="larger-text" style="color: white;" display="flex">Help me help you. Ask me anything!</label><br>
-                <textarea id="prompt" name="prompt" rows="3" cols="50" maxlength="500" spellcheck="true"></textarea><br>
-            </div>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-    <div class="chat-container">
-        <div style="color: white;" id="chat-log">
-            <div class="loading" id="loadingDots" style="display: none;">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <div class="header-container">
+            <h1 style="color: white; display: inline-block; font-size: 50px; padding-bottom: 0px; padding-top: 15px;">SpotOn AI</h1>
+            <img src="Logo White@3x.PNG" alt="SpotOn Logo" style="display: none; vertical-align: middle; margin-left: 10px;">
         </div>
-        <div style="color: white;" id="responses"></div>
-        <p style="color: white;" id="response"></p>
-    </div>
-    <div class="button-container">
-        <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
-    </div>
-    <div class="button-container">
-        <button id="downloadChatBtn">Save Chat</button>
-    </div>
-    <div class="footer-container">
-        <p style="color: white;">Presented by DB | 2023</a></p>
-    </div>  
+        <div class="image-container">
+            <img src="4 Pillars.png" alt="4 Pillars">
+        </div>
+        <div class="body-container">
+            <form id="gpt-form">
+                <div class="textarea-container">
+                    <label for="prompt" class="larger-text" style="color: white;" display="flex">Help me help you. Ask me anything!</label><br>
+                    <textarea id="prompt" name="prompt" rows="3" cols="50" maxlength="500" spellcheck="true"></textarea><br>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="chat-container">
+            <div style="color: white;" id="chat-log">
+                <div class="loading" id="loadingDots" style="display: none;">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div style="color: white;" id="responses"></div>
+            <p style="color: white;" id="response"></p>
+        </div>
+        <div class="button-container">
+            <button style="display: block; margin: 10px auto 0; text-align: center;" id="resetChatButton">Reset Chat</button>
+        </div>
+        <div class="button-container">
+            <button id="downloadChatBtn">Save Chat</button>
+        </div>
+        <div class="logo-container">
+            <img src="desktop-capterra-logos-restaurant-pos copy.png" alt="Capterra">
+        </div>
+        <div class="footer-container">
+            <p style="color: white;">Presented by DB | 2023</a></p>
+        </div>
+    </div>      
     <script>
         $(document).ready(function() {
             let conversationHistory = [];
