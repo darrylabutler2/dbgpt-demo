@@ -140,10 +140,29 @@ input[type="submit"]:active {
     position: relative;
     padding: 10px;
 }
+
+#awards {
+    position: absolute;
+    display: block;    
+}
+.logo-container {
+    width: webkit-fill-available;
+    position: relative;
+    padding-bottom: 20%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
+}
+.logo-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* This makes the image to maintain aspect ratio */
+}
 .footer-container {
     color: white;
     text-align: center;
-    padding: 1em 0;
+    padding: 1px;
     position: static;
     left: 0;
     bottom: 0;
@@ -177,7 +196,7 @@ input[type="submit"]:active {
         height: 100%;
         object-fit: cover; /* This makes the image to maintain aspect ratio */
     }
-
+  
     .larger-text {
         font-size: 20px;
     }
