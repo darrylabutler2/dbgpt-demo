@@ -29,13 +29,7 @@
             </form>
         </div>
         <div class="chat-container">
-            <div style="color: white;" id="chat-log">
-                <div class="loading" id="loadingDots" style="display: none;">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
+            <div style="color: white;" id="chat-log"></div>
             <div style="color: white;" id="responses"></div>
             <p style="color: white;" id="response"></p>
         </div>
@@ -63,7 +57,7 @@
                 e.preventDefault();
 
                 const messageText = document.getElementById('prompt').value.trim();
-                    if (messageText === '') {
+                if (messageText === '') {
                     return; // If the input is empty, don't continue with submission
                 }
 
@@ -85,7 +79,9 @@
                 chatLog.insertBefore(messageContainer, chatLog.firstChild);
                 chatLog.scrollTop = 0;
 
-                $('#loadingDots').show();
+                // Create and show loadingDots for this specific messageContainer
+                const loadingDotsClone = $('<div class="loading" style="display: block;"><div></div><div></div><div></div></div>');
+                messageContainer.appendChild(loadingDotsClone[0]);
 
                 // Limit history to the last 2 interactions
                 const limitedHistory = conversationHistory.slice(-2).join("\n");
@@ -96,6 +92,8 @@
                     contentType: "application/json",
                     data: JSON.stringify({ prompt: limitedHistory }),
                     success: function(response) {
+                        $(loadingDotsClone).remove();
+                        
                         let displayResponse = response.trim();
                         conversationHistory.push(displayResponse);
 
@@ -108,14 +106,14 @@
                         messageContainer.appendChild(assistantMessageElement);
                         chatLog.insertBefore(messageContainer, chatLog.firstChild);
                         chatLog.scrollTop = 0;
-                        $('#loadingDots').hide();
                     },
                     error: function(xhr, status, errorThrown) {
+                        $(loadingDotsClone).remove();
+                        
                         console.log(xhr.responseText);
                         const errorElement = document.createElement('p');
                         errorElement.innerText = "Error: " + errorThrown;
                         responses.insertBefore(errorElement, responses.firstChild);
-                        $('#loadingDots').hide();
                     }
                 });
 
@@ -132,30 +130,26 @@
                     URL.revokeObjectURL(a.href);
                 });
                 
-            $('#resetChatButton').on('click', function() {
-                console.log("Reset button clicked");
-                // Loop through the error messages before clearing the chat log
-                $('#chat-log .error-message').each(function() {
-                    if ($(this).text() === "Error: Internal Server Error") {
-                        // If you need to do something specific with error messages, do it here
-                        $(this).remove();  // This line might be redundant if you're clearing the entire chat log in the next step.
-                    }
+                $('#resetChatButton').on('click', function() {
+                    console.log("Reset button clicked");
+
+                    // Hide the chat log and related elements
+                    $('#chat-log, #responses, #response').hide();
+
+                    // Clear conversation history
+                    conversationHistory = [];
+
+                    // Clear the input field
+                    $('#prompt').val('');
+
+                    // Now clear the entire chat log and responses
+                    $('#chat-log .message-group').remove();
+
+                    // Clear the error messages
+                    $('#responses').empty();
+
+                    console.log("Reset function finished");
                 });
-
-                // Hide the chat log and related elements
-                $('#chat-log, #responses, #response').hide();
-    
-                // Clear conversation history
-                conversationHistory = [];
-
-                // Clear the input field
-                $('#prompt').val('');
-
-                // Now clear the entire chat log and responses
-                $('#chat-log .message-group').remove();
-
-                console.log("Reset function finished");
-            });
 
             $('#prompt').on('keypress', function(e) {
                 if (e.which == 13) {
