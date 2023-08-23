@@ -47,6 +47,44 @@
         </div>
     </div>      
     <script>
+        function linkify(inputText) {
+            var replacedText, replacePattern1, replacePattern2, replacePattern3;
+
+            //URLs starting with http://, https://, or ftp://
+            replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+            replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+            //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+            replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+            replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+            //Change email addresses to mailto:: links.
+            replacePattern3 = /(([a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+)\b)/gim;
+            replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+            return replacedText;
+        }
+        function formatAsList(text) {
+            const lines = text.split(/\n/).map(line => line.trim());
+
+            // Check if text has list items that start with '-' or a number followed by '.'
+            const hasListItems = lines.some(line => line.startsWith('-') || /^\d+\./.test(line));
+
+            if (!hasListItems) {
+                return linkify(text);
+            }
+
+            const listItems = lines.map(line => {
+                // Check if line starts with '-' or a number followed by '.'
+                if (line.startsWith('-') || /^\d+\./.test(line)) {
+                    return `<li>${linkify(line.substring(line.indexOf('.') + 1).trim())}</li>`;
+                }
+                return linkify(line);
+            }).join('');
+
+            return `<ul>${listItems}</ul>`;
+        }
+
         $(document).ready(function() {
             let conversationHistory = [];
             const chatLog = document.getElementById('chat-log');
@@ -94,7 +132,8 @@
                     success: function(response) {
                         $(loadingDotsClone).remove();
                         
-                        let displayResponse = response.trim();
+                        let rawResponse = response.trim();
+                        let displayResponse = formatAsList(rawResponse);
                         conversationHistory.push(displayResponse);
 
                         const assistantMessageElement = document.createElement('div');
